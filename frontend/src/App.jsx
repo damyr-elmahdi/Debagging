@@ -15,6 +15,12 @@ import AdminExerciseList from "./Components/Exercises/AdminExerciseList";
 import ExerciseForm from "./Components/Exercises/ExerciseForm";
 import ClientExerciseList from "./Components/Exercises/ClientExerciseList";
 import ExerciseDetail from "./Components/Exercises/ExerciseDetail";
+// import AdminProductList from "./Components/Product/AdminProductList";
+
+import AdminProductList from "./Components/Product/AdminProductList ";
+import ProductForm from "./Components/Product/ProductForm";
+import ClientProductList from "./Components/Product/ClientProductList ";
+import ProductDetail from "./Components/Product/ProductDetail";
 import AppProvider from "./Context/AppContext";
 import "remixicon/fonts/remixicon.css";
 
@@ -72,6 +78,32 @@ export default function App() {
           }
         />
 
+        {/* Admin Product Routes */}
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminProductList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/products/create"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <ProductForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/products/edit/:id"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <ProductForm />
+            </ProtectedRoute>
+          }
+        />
+
         {/* Client Routes */}
         <Route
           path="/client/dashboard"
@@ -94,6 +126,24 @@ export default function App() {
           element={
             <ProtectedRoute requiredRole="client">
               <ExerciseDetail />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Client Product Routes */}
+        <Route
+          path="/client/products"
+          element={
+            <ProtectedRoute requiredRole="client">
+              <ClientProductList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/client/products/:id"
+          element={
+            <ProtectedRoute requiredRole="client">
+              <ProductDetail />
             </ProtectedRoute>
           }
         />
