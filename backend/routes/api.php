@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\FavoriteExerciseController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -77,3 +78,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/exercises/{id}/favorite', [FavoriteExerciseController::class, 'toggleFavorite']);
     Route::get('/favorites', [FavoriteExerciseController::class, 'getFavorites']);
 });
+
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::post('/products', [ProductController::class, 'store']);
+    Route::put('/products/{id}', [ProductController::class, 'update']);
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    Route::get('/admin/products', [ProductController::class, 'index']);
+});
+
+// Public product routes
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/products/{id}', [ProductController::class, 'show']);
