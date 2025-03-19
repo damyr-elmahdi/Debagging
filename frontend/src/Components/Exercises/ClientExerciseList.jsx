@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 
 const ClientExerciseList = () => {
@@ -17,14 +18,17 @@ const ClientExerciseList = () => {
   const fetchExercises = async () => {
     try {
       const response = await fetch("/api/exercises");
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch exercises");
+        const errorText = await response.text();
+        console.error("Error response:", errorText);
+        throw new Error(`Failed to fetch exercises: ${response.status}`);
       }
-
+      
+      const data = await response.json();
+      console.log("Fetched exercises:", data);
       setExercises(data);
     } catch (error) {
+      console.error("Error in fetchExercises:", error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -39,11 +43,14 @@ const ClientExerciseList = () => {
         },
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch favorites");
+        const errorText = await response.text();
+        console.error("Error response:", errorText);
+        throw new Error(`Failed to fetch favorites: ${response.status}`);
       }
+
+      const data = await response.json();
+      console.log("Fetched favorites:", data);
 
       // Extract just the favorite exercise IDs
       const favoriteIds = data.map((exercise) => exercise.idExercice);
@@ -197,12 +204,12 @@ const ClientExerciseList = () => {
                   <i className={`ri-heart-${favorites.includes(exercise.idExercice) ? "fill" : "line"} text-xl mr-1`}></i>
                   {favorites.includes(exercise.idExercice) ? "Favorited" : "Add to Favorites"}
                 </button>
-                <button
+                <Link
+                  to={`/client/exercises/${exercise.idExercice}`}
                   className="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600"
-                  onClick={() => window.location.href = `/exercises/${exercise.idExercice}`}
                 >
                   Details
-                </button>
+                </Link>
               </div>
             </div>
           ))}
