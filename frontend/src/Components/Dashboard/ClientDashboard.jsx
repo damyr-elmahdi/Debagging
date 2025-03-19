@@ -100,7 +100,7 @@ const ClientDashboard = () => {
         {/* Quick Actions */}
         <div className="bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-700">Exercise Library</h3>
               <p className="text-gray-600 mt-2">Browse and discover new exercises</p>
@@ -119,6 +119,16 @@ const ClientDashboard = () => {
                 className="mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition duration-300 inline-block"
               >
                 My Workouts
+              </Link>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-700">Store</h3>
+              <p className="text-gray-600 mt-2">Browse and purchase fitness products</p>
+              <Link
+                to="/client/products"
+                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 inline-block"
+              >
+                Visit Store
               </Link>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">

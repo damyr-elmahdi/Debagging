@@ -15,8 +15,6 @@ import AdminExerciseList from "./Components/Exercises/AdminExerciseList";
 import ExerciseForm from "./Components/Exercises/ExerciseForm";
 import ClientExerciseList from "./Components/Exercises/ClientExerciseList";
 import ExerciseDetail from "./Components/Exercises/ExerciseDetail";
-// import AdminProductList from "./Components/Product/AdminProductList";
-
 import AdminProductList from "./Components/Product/AdminProductList ";
 import ProductForm from "./Components/Product/ProductForm";
 import ClientProductList from "./Components/Product/ClientProductList ";
@@ -24,10 +22,19 @@ import ProductDetail from "./Components/Product/ProductDetail";
 import AppProvider from "./Context/AppContext";
 import "remixicon/fonts/remixicon.css";
 
+const NotFoundPage = () => (
+  <div className="flex justify-center items-center h-screen">
+    <div className="text-2xl text-red-600 font-semibold">
+      404 - Page Not Found
+    </div>
+  </div>
+);
+
 export default function App() {
   return (
     <AppProvider>
       <Routes>
+        {/* Landing Page Route */}
         <Route
           path="/"
           element={
@@ -42,6 +49,8 @@ export default function App() {
             </>
           }
         />
+
+        {/* Login/Register Route */}
         <Route path="/login-register" element={<LoginRegister />} />
 
         {/* Admin Routes */}
@@ -147,6 +156,9 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Fallback Route for Unmatched Paths */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </AppProvider>
   );

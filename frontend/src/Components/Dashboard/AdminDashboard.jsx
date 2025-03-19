@@ -83,6 +83,24 @@ const AdminDashboard = () => {
               </Link>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-700">Product Management</h3>
+              <p className="text-gray-600 mt-2">Create and manage store products</p>
+              <div className="flex space-x-2 mt-4">
+                <Link
+                  to="/admin/products"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 inline-block"
+                >
+                  Manage Products
+                </Link>
+                <Link
+                  to="/admin/products/create"
+                  className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition duration-300 inline-block"
+                >
+                  Create Product
+                </Link>
+              </div>
+            </div>
+            <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-700">System Settings</h3>
               <p className="text-gray-600 mt-2">Configure application settings and preferences</p>
               <button className="mt-4 bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition duration-300">

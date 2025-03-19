@@ -7,15 +7,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  /* background: linear-gradient(90deg, #e2e2e2, #c9d6ff); */
-}
 
-.container {
+.cont {
   position: relative;
   width: 850px;
   height: 570px;
@@ -26,7 +19,7 @@ body {
   overflow: hidden;
 }
 
-.form-box {
+.forbox {
   position: absolute;
   right: 0;
   width: 50%;
@@ -39,15 +32,15 @@ body {
   transition: 0.6s ease-in-out 1.2s, visibility 0s 1s;
 }
 
-.container.active .form-box {
+.cont.actv .forbox {
   right: 50%;
 }
 
-.form-box.register {
+.forbox.register {
   visibility: hidden;
 }
 
-.container.active .form-box.register {
+.cont.actv .forbox.register {
   visibility: visible;
 }
 
@@ -55,17 +48,17 @@ form {
   width: 100%;
 }
 
-.container h1 {
+.cont h1 {
   font-size: 36px;
   margin: -10px 0;
 }
 
-.input-box {
+.inpbox {
   position: relative;
   margin: 30px 0;
 }
 
-.input-box input {
+.inpbox input {
   width: 100%;
   padding: 13px 50px 13px 20px;
   background: #eee;
@@ -77,12 +70,12 @@ form {
   font-weight: 500;
 }
 
-.input-box input::placeholder {
+.inpbox input::placeholder {
   color: #888;
   font-weight: 400;
 }
 
-.input-box i {
+.inpbox i {
   position: absolute;
   right: 20px;
   top: 30%;
@@ -101,7 +94,7 @@ form {
   text-decoration: none;
 }
 
-.btn {
+.button {
   width: 100%;
   height: 48px;
   background: #7494ec;
@@ -114,7 +107,7 @@ form {
   font-weight: 600;
 }
 
-.container p {
+.cont p {
   font-size: 14.5px;
   margin: 15px 0;
 }
@@ -135,13 +128,13 @@ form {
   justify-content: center;
 }
 
-.toggle-box {
+.togbox {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-.toggle-box::before {
+.togbox::before {
   content: "";
   position: absolute;
   left: -250%;
@@ -153,11 +146,11 @@ form {
   transition: 1.8s ease-in-out;
 }
 
-.container.active .toggle-box::before {
+.cont.actv .togbox::before {
   left: 50%;
 }
 
-.toggle-panel {
+.togpanal {
   position: absolute;
   width: 50%;
   height: 100%;
@@ -170,36 +163,36 @@ form {
   transition: 0.6s ease-in-out;
 }
 
-.toggle-panel.toggle-left {
+.togpanal.toggle-left {
   left: 0;
   transition-delay: 1.2s;
 }
 
-.container.active .toggle-panel.toggle-left {
+.cont.actv .togpanal.toggle-left {
   left: -50%;
   transition-delay: 0.6s;
 }
 
-.toggle-panel .active .toggle-panel.toggle-left {
+.togpanal .actv .togpanal.toggle-left {
   left: -50px;
   transition-delay: 0.6s;
 }
 
-.toggle-panel.toggle-right {
+.togpanal.toggle-right {
   right: -50%;
   transition-delay: 1.2s;
 }
 
-.container.active .toggle-panel.toggle-right {
+.cont.actv .togpanal.toggle-right {
   right: 0;
   transition-delay: 1.2s;
 }
 
-.toggle-panel p {
+.togpanal p {
   margin-bottom: 20px;
 }
 
-.toggle-panel .btn {
+.togpanal .button {
   width: 160px;
   height: 46px;
   background: transparent;
@@ -238,7 +231,7 @@ form {
   }
 }
 
-.loading-container {
+.loading-cont {
   display: flex;
   justify-content: center;
   align-items: center;

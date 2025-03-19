@@ -24,6 +24,15 @@ const Header = () => {
     setShowDropdown(!showDropdown);
   };
 
+  const navigateToDashboard = () => {
+    if (user.role === "admin") {
+      navigate("/admin/dashboard");
+    } else if (user.role === "client") {
+      navigate("/client/dashboard");
+    }
+    setShowDropdown(false);
+  };
+
   return (
     <header className="header">
       <nav>
@@ -64,6 +73,9 @@ const Header = () => {
                 </button>
                 {showDropdown && (
                   <div className="dropdown-menu">
+                    <button className="dashboard-btn" onClick={navigateToDashboard}>
+                      Dashboard
+                    </button>
                     <button className="logout-btn" onClick={handleLogout}>
                       Logout
                     </button>

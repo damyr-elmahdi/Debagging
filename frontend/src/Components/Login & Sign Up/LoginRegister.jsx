@@ -130,7 +130,7 @@ const LoginRegister = () => {
   }
 
   return (
-    <div>
+    <div className="flex justify-center items-center min-h-screen">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -138,19 +138,19 @@ const LoginRegister = () => {
       />
 
       {user ? (
-        <div className="loading-container">
+        <div className="loading-cont">
           <div className="loading-spinner"></div>
         </div>
       ) : (
-        <div className={`container ${isActive ? "active" : ""}`}>
-          <div className="form-box login">
+        <div className={`cont ${isActive ? "actv" : ""}`}>
+          <div className="forbox login">
             <form onSubmit={handleLogin}>
               <h1>Login</h1>
               {loginErrors.general && (
                 <p className="error">{loginErrors.general[0]}</p>
               )}
 
-              <div className="input-box">
+              <div className="inpbox">
                 <input
                   type="text"
                   placeholder="Email"
@@ -166,7 +166,7 @@ const LoginRegister = () => {
                 <p className="error">{loginErrors.email[0]}</p>
               )}
 
-              <div className="input-box">
+              <div className="inpbox">
                 <input
                   type={showPassword ? "text" : "password"} // Toggle input type
                   placeholder="Password"
@@ -191,7 +191,7 @@ const LoginRegister = () => {
                 <a href="#">Forgot password ?</a>
               </div>
 
-              <button type="submit" className="btn">
+              <button type="submit" className="button">
                 Login
               </button>
               <br />
@@ -214,14 +214,14 @@ const LoginRegister = () => {
             </form>
           </div>
 
-          <div className="form-box register">
+          <div className="forbox register">
             <form onSubmit={handleRegister}>
               <h1>Registration</h1>
               {registerErrors.general && (
                 <p className="error">{registerErrors.general[0]}</p>
               )}
 
-              <div className="input-box">
+              <div className="inpbox">
                 <input
                   type="text"
                   placeholder="Username"
@@ -237,7 +237,7 @@ const LoginRegister = () => {
                 <p className="error">{registerErrors.name[0]}</p>
               )}
 
-              <div className="input-box">
+              <div className="inpbox">
                 <input
                   type="email"
                   placeholder="Email"
@@ -252,7 +252,7 @@ const LoginRegister = () => {
               {registerErrors.email && (
                 <p className="error">{registerErrors.email[0]}</p>
               )}
-              <div className="input-box">
+              <div className="inpbox">
                 <input
                   type={showPassword ? "text" : "password"} // Toggle input type
                   placeholder="Password"
@@ -276,7 +276,7 @@ const LoginRegister = () => {
                 <p className="error">{registerErrors.password[0]}</p>
               )}
 
-              <div className="input-box">
+              <div className="inpbox">
                 <input
                   type={showPassword ? "text" : "password"} // Toggle input type
                   placeholder="Confirm Password"
@@ -297,7 +297,7 @@ const LoginRegister = () => {
                 ></i>
               </div>
 
-              <button type="submit" className="btn">
+              <button type="submit" className="button">
                 Register
               </button>
 
@@ -319,22 +319,22 @@ const LoginRegister = () => {
             </form>
           </div>
 
-          <div className="toggle-box">
-            <div className="toggle-panel toggle-left">
+          <div className="togbox">
+            <div className="togpanal toggle-left">
               <h1>Hello, Welcome!</h1>
               <p>Don't have an account?</p>
               <button
-                className="btn register-btn"
+                className="button register-btn"
                 onClick={() => setIsActive(true)}
               >
                 Register
               </button>
             </div>
-            <div className="toggle-panel toggle-right">
+            <div className="togpanal toggle-right">
               <h1>Welcome Back!</h1>
               <p>Already have an account?</p>
               <button
-                className="btn login-btn"
+                className="button login-btn"
                 onClick={() => setIsActive(false)}
               >
                 Login
