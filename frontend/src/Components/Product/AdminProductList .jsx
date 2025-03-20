@@ -101,7 +101,7 @@ const AdminProductList = () => {
                   <tr key={product.id} className="border-b border-gray-200 hover:bg-gray-100">
                     <td className="py-3 px-6">
                       <img
-                        src={`/storage/${product.image}`}
+                        src={`http://localhost:8000/storage/${product.image}`}
                         alt={product.nom}
                         className="w-16 h-16 object-cover rounded"
                       />

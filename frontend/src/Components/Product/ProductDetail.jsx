@@ -95,7 +95,7 @@ const ProductDetail = () => {
         <div className="md:flex">
           <div className="md:w-1/2">
             <img
-              src={`/storage/${product.image}`}
+              src={`http://localhost:8000/storage/${product.image}`}
               alt={product.nom}
               className="w-full h-96 object-cover"
             />

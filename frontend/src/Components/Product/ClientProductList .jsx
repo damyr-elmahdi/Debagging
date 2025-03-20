@@ -89,7 +89,7 @@ const ClientProductList = () => {
             products.map((product) => (
               <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                 <img
-                  src={`/storage/${product.image}`}
+                  src={`http://localhost:8000/storage/${product.image}`}
                   alt={product.nom}
                   className="w-full h-48 object-cover"
                 />

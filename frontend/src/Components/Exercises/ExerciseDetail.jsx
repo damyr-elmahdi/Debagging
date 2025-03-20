@@ -124,7 +124,7 @@ const ExerciseDetail = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-4xl"  >
+    <div className="container mx-auto p-6 max-w-4xl">
       <div className="mb-6">
         <Link
           to="/client/exercises"
@@ -140,8 +140,11 @@ const ExerciseDetail = () => {
             {exercise.image ? (
               <img
                 className="w-full h-64 md:h-full object-cover"
-                src={`/storage/${exercise.image}`}
+                src={`http://localhost:8000/storage/${exercise.image}`}
                 alt={exercise.nom}
+                onError={(e) => {
+                  e.target.src = "https://via.placeholder.com/400x300"; // Fallback image if the main image fails to load
+                }}
               />
             ) : (
               <div className="w-full h-64 md:h-full bg-gray-100 flex items-center justify-center">
@@ -190,9 +193,12 @@ const ExerciseDetail = () => {
                 <p className="text-gray-600">{exercise.partieCorps}</p>
                 {exercise.partieCorpsPic && (
                   <img
-                    src={`/storage/${exercise.partieCorpsPic}`}
+                    src={`http://localhost:8000/storage/${exercise.partieCorpsPic}`}
                     alt="Target area"
                     className="mt-4 h-32 object-contain"
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/400x300"; // Fallback image if the body part image fails to load
+                    }}
                   />
                 )}
               </div>

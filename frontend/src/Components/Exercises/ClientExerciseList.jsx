@@ -23,7 +23,7 @@ const ClientExerciseList = () => {
         console.error("Error response:", errorText);
         throw new Error(`Failed to fetch exercises: ${response.status}`);
       }
-      
+
       const data = await response.json();
       console.log("Fetched exercises:", data);
       setExercises(data);
@@ -88,11 +88,12 @@ const ClientExerciseList = () => {
   };
 
   // Filter exercises based on selected filter
-  const filteredExercises = filter === "all" 
-    ? exercises 
-    : filter === "favorites" 
-      ? exercises.filter(exercise => favorites.includes(exercise.idExercice))
-      : exercises.filter(exercise => exercise.partieCorps === filter);
+  const filteredExercises =
+    filter === "all"
+      ? exercises
+      : filter === "favorites"
+      ? exercises.filter((exercise) => favorites.includes(exercise.idExercice))
+      : exercises.filter((exercise) => exercise.partieCorps === filter);
 
   if (loading) {
     return <div className="text-center p-4">Loading...</div>;
@@ -179,9 +180,12 @@ const ClientExerciseList = () => {
               <div className="aspect-video bg-gray-200 mb-2">
                 {exercise.image && (
                   <img
-                    src={exercise.image ? `/storage/${exercise.image.replace('public/', '')}` : ''}
+                    src={`http://localhost:8000/storage/${exercise.image}`}
                     alt={exercise.nom}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = "https://via.placeholder.com/400x300"; // Fallback image
+                    }}
                   />
                 )}
               </div>
@@ -201,8 +205,14 @@ const ClientExerciseList = () => {
                       : "text-gray-400"
                   }`}
                 >
-                  <i className={`ri-heart-${favorites.includes(exercise.idExercice) ? "fill" : "line"} text-xl mr-1`}></i>
-                  {favorites.includes(exercise.idExercice) ? "Favorited" : "Add to Favorites"}
+                  <i
+                    className={`ri-heart-${
+                      favorites.includes(exercise.idExercice) ? "fill" : "line"
+                    } text-xl mr-1`}
+                  ></i>
+                  {favorites.includes(exercise.idExercice)
+                    ? "Favorited"
+                    : "Add to Favorites"}
                 </button>
                 <Link
                   to={`/client/exercises/${exercise.idExercice}`}

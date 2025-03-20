@@ -62,15 +62,6 @@ const AdminExerciseList = () => {
     }
   };
 
-  // Function to properly format image path
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return null;
-    // If path already contains /storage, use it as is
-    if (imagePath.startsWith('/storage/')) return imagePath;
-    // Otherwise, format properly
-    return `/storage/${imagePath}`;
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
@@ -111,12 +102,11 @@ const AdminExerciseList = () => {
               <div className="aspect-video bg-gray-200 mb-2">
                 {exercise.image && (
                   <img
-                    src={getImageUrl(exercise.image)}
+                    src={`http://localhost:8000/storage/${exercise.image}`}
                     alt={exercise.nom}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      console.error("Image failed to load:", exercise.image);
-                      e.target.src = "https://via.placeholder.com/300x200?text=Image+Not+Found";
+                      e.target.src = "https://via.placeholder.com/400x300"; // Fallback image
                     }}
                   />
                 )}

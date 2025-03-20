@@ -56,11 +56,11 @@ const ExerciseForm = () => {
 
       // Set image previews if available
       if (data.image) {
-        setPreviewImage(`/storage/${data.image}`);
+        setPreviewImage(`http://localhost:8000/storage/${data.image}`);
       }
       
       if (data.partieCorpsPic) {
-        setPreviewBodyPartImage(`/storage/${data.partieCorpsPic}`);
+        setPreviewBodyPartImage(`http://localhost:8000/storage/${data.partieCorpsPic}`);
       }
     } catch (error) {
       console.error("Error fetching exercise:", error);
