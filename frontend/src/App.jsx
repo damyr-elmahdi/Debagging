@@ -19,6 +19,7 @@ import AdminProductList from "./Components/Product/AdminProductList ";
 import ProductForm from "./Components/Product/ProductForm";
 import ClientProductList from "./Components/Product/ClientProductList ";
 import ProductDetail from "./Components/Product/ProductDetail";
+import UserManagement from "./Components/User/UserManagement";
 import AppProvider from "./Context/AppContext";
 import "remixicon/fonts/remixicon.css";
 
@@ -59,6 +60,14 @@ export default function App() {
           element={
             <ProtectedRoute requiredRole="admin">
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <UserManagement />
             </ProtectedRoute>
           }
         />

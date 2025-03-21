@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../../Context/AppContext";
@@ -6,6 +6,44 @@ import { AppContext } from "../../Context/AppContext";
 const AdminDashboard = () => {
   const { user, setToken, setUser } = useContext(AppContext);
   const navigate = useNavigate();
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    newPosts: 0,
+    activeSessions: 0
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
+
+  const fetchDashboardStats = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/user-stats", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch dashboard stats");
+      }
+
+      const data = await response.json();
+      setStats({
+        totalUsers: data.totalUsers,
+        newPosts: data.newPosts || 18, // Fallback to dummy data if not provided
+        activeSessions: data.activeSessions || 32 // Fallback to dummy data if not provided
+      });
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -46,20 +84,37 @@ const AdminDashboard = () => {
       {/* Dashboard Content */}
       <div className="p-6">
         {/* Stats Panel */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-700">Total Users</h3>
-            <p className="text-3xl font-bold text-blue-600">245</p>
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {[1, 2, 3].map((item) => (
+              <div key={item} className="bg-white p-6 rounded-lg shadow-md">
+                <div className="animate-pulse">
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-8 bg-gray-200 rounded w-1/4"></div>
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-700">New Posts</h3>
-            <p className="text-3xl font-bold text-green-600">18</p>
+        ) : error ? (
+          <div className="bg-red-100 p-4 rounded-lg mb-8">
+            <p className="text-red-600">Error loading stats: {error}</p>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-lg font-semibold text-gray-700">Active Sessions</h3>
-            <p className="text-3xl font-bold text-purple-600">32</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold text-gray-700">Total Users</h3>
+              <p className="text-3xl font-bold text-blue-600">{stats.totalUsers}</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold text-gray-700">New Posts</h3>
+              <p className="text-3xl font-bold text-green-600">{stats.newPosts}</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md">
+              <h3 className="text-lg font-semibold text-gray-700">Active Sessions</h3>
+              <p className="text-3xl font-bold text-purple-600">{stats.activeSessions}</p>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Admin Tools */}
         <div className="bg-white p-6 rounded-lg shadow-md">
@@ -68,9 +123,12 @@ const AdminDashboard = () => {
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-700">User Management</h3>
               <p className="text-gray-600 mt-2">Create, update, or delete user accounts</p>
-              <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">
+              <Link
+                to="/admin/users"
+                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 inline-block"
+              >
                 Manage Users
-              </button>
+              </Link>
             </div>
             <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
               <h3 className="text-xl font-semibold text-gray-700">Exercise Management</h3>

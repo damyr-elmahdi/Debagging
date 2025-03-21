@@ -50,14 +50,20 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         
-        $request->validate([
-            'nom' => 'string|max:255',
-            'prix' => 'numeric|min:0',
-            'description' => 'string',
-            'categorie' => 'string|max:100',
-            'stock' => 'integer|min:0',
-            'image' => 'sometimes|image|max:2048', // Max 2MB
-        ]);
+        $validationRules = [
+            'nom' => 'required|string|max:255',
+            'prix' => 'required|numeric|min:0',
+            'description' => 'required|string',
+            'categorie' => 'required|string|max:100',
+            'stock' => 'required|integer|min:0',
+        ];
+        
+        // Only validate image if it's provided
+        if ($request->hasFile('image')) {
+            $validationRules['image'] = 'image|max:2048'; // Max 2MB
+        }
+        
+        $request->validate($validationRules);
 
         // Handle image upload if provided
         if ($request->hasFile('image')) {
@@ -70,11 +76,12 @@ class ProductController extends Controller
             $product->image = $imagePath;
         }
         
-        $product->nom = $request->nom ?? $product->nom;
-        $product->prix = $request->prix ?? $product->prix;
-        $product->description = $request->description ?? $product->description;
-        $product->categorie = $request->categorie ?? $product->categorie;
-        $product->stock = $request->stock ?? $product->stock;
+        // Update product properties
+        $product->nom = $request->nom;
+        $product->prix = $request->prix;
+        $product->description = $request->description;
+        $product->categorie = $request->categorie;
+        $product->stock = $request->stock;
         
         $product->save();
 
